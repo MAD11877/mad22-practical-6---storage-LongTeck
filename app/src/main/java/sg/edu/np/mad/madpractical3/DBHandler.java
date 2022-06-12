@@ -83,6 +83,7 @@ public class DBHandler extends SQLiteOpenHelper {
             usersList.add(user);
         }
 
+        cursor.close();
         return usersList;
     }
 
@@ -99,5 +100,6 @@ public class DBHandler extends SQLiteOpenHelper {
        /* String sql = "UPDATE User set Followed = i where Name = user.name";
         db.execSQL(sql);*/
         db.execSQL("Update User set Followed = " + i + " where Id = " + user.Id);
+        db.close();
     }
 }
