@@ -27,20 +27,20 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        /*DBHandler db = new DBHandler(this);
+        DBHandler db = new DBHandler(this);
 
         Random rand = new Random();
-        for(int i=0; i < 20; i++){
-            String name = "Name" + rand.nextInt();
-            String description = "Description " + rand.nextInt();
-            int id = i;
-            boolean followed = rand.nextBoolean();
-            User user = new User(name, description, id, followed);
-            //data.add(user);
-            db.insertMsg(user);
-        }*/
-        InitData();
-        DBHandler db = new DBHandler(this);
+        if (db.getUsers().size() == 0){
+            for(int i=0; i < 20; i++){
+                String name = "Name" + rand.nextInt();
+                String description = "Description " + rand.nextInt();
+                int id = i;
+                boolean followed = rand.nextBoolean();
+                User user = new User(name, description, id, followed);
+                //data.add(user);
+                db.insertMsg(user);
+            }
+        }
         data = db.getUsers();
 
         RecyclerView rv = findViewById(R.id.recyclerView);
@@ -50,21 +50,6 @@ public class ListActivity extends AppCompatActivity {
         rv.setAdapter(adapter);
         rv.setLayoutManager(layout);
 
-    }
-
-    public void InitData(){
-        DBHandler db = new DBHandler(this);
-
-        Random rand = new Random();
-        for(int i=0; i < 20; i++){
-            String name = "Name" + rand.nextInt();
-            String description = "Description " + rand.nextInt();
-            int id = i;
-            boolean followed = rand.nextBoolean();
-            User user = new User(name, description, id, followed);
-            //data.add(user);
-            db.insertMsg(user);
-        }
     }
 
 }

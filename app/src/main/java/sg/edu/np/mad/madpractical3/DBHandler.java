@@ -27,23 +27,9 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void insertMsg(User user){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("Select * from User", null);
-        if(cursor.moveToNext() == false){
-            int i = 0;
-            if(user.Followed == false){
-                i = 0;
-            }
-            else{
-                i = 1;
-            }
-            db.execSQL("Insert into User Values(\"" + user.Name + "\", \"" + user.Description + "\", \"" + user.Id + "\", \"" + i + "\")");
-            /**
-             * Insert into Message Values("Username", "Message", "DT)
-             */
-            db.close();
-        }
-
-        /*int i = 0;
+        /*Cursor cursor = db.rawQuery("Select * from User", null);
+        if(cursor.moveToNext() == false){*/
+        int i = 0;
         if(user.Followed == false){
             i = 0;
         }
@@ -51,10 +37,10 @@ public class DBHandler extends SQLiteOpenHelper {
             i = 1;
         }
         db.execSQL("Insert into User Values(\"" + user.Name + "\", \"" + user.Description + "\", \"" + user.Id + "\", \"" + i + "\")");
-        *//**
+        /**
          * Insert into Message Values("Username", "Message", "DT)
-         *//*
-        db.close();*/
+         */
+        db.close();
     }
 
     public ArrayList<User> getUsers(){
@@ -83,7 +69,6 @@ public class DBHandler extends SQLiteOpenHelper {
             usersList.add(user);
         }
 
-        cursor.close();
         return usersList;
     }
 
@@ -100,6 +85,7 @@ public class DBHandler extends SQLiteOpenHelper {
        /* String sql = "UPDATE User set Followed = i where Name = user.name";
         db.execSQL(sql);*/
         db.execSQL("Update User set Followed = " + i + " where Id = " + user.Id);
+
         db.close();
     }
 }
